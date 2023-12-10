@@ -78,14 +78,6 @@ export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
 		const { bucket } = env;
 
-		if (request.headers.get('Authorization') !== `Basic ${btoa(`${env.USERNAME}:${env.PASSWORD}`)}`) {
-			return new Response('Unauthorized', {
-				status: 401, headers: {
-					'WWW-Authenticate': 'Basic realm="webdav"',
-				}
-			});
-		}
-
 		let response: Response;
 
 		let resource_path = new URL(request.url).pathname.slice(1);
